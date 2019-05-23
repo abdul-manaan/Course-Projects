@@ -1,0 +1,76 @@
+Q2 test 1:
+7 mins 
+Q2 test 2:
+4 mins
+For Q2, the stations and time spent at each station is not given as that would give away the solution.
+
+Q3: There can be mutiple outputs for each question. It'll be easy to check whether or not output is correct, so output not provided.
+
+Q4 case 1: Ordering of racks is: 6,8,3,2,9,1,10,7,4,5 OR 8,6,3,2,9,1,10,7,4,5
+Q4 case 2: Ordering of racks is: 4,14,3,9,7,8,13,10,1,6,15,5,12,2,11
+Note: in case 2, ordering of ordering between rack 9 and 3 can be reversed i.e 9 can come before 3 and vice versa. Same with racks 13,10,11 and 6,15 and 5,12.
+You guys can figure out the time yourself for these orderings by applying formula given in assignment.
+
+Q5a case 1) **********ORIGINAL MST*********
+edges:  Vertex 1: C0 Vertex 2: C1 Val: 3
+edges:  Vertex 1: C0 Vertex 2: C2 Val: 4
+edges:  Vertex 1: C1 Vertex 2: C4 Val: 2
+edges:  Vertex 1: C4 Vertex 2: C3 Val: 2
+removed edge is:  Vertex 1: C1 Vertex 2: C4 Val: 2
+*******NEW MST********
+edges:  Vertex 1: C0 Vertex 2: C1 Val: 3
+edges:  Vertex 1: C0 Vertex 2: C2 Val: 4
+edges:  Vertex 1: C2 Vertex 2: C3 Val: 4
+edges:  Vertex 1: C4 Vertex 2: C3 Val: 2
+
+Q5b case 1) Inserted edge: Vertex 1: C1 Vertex 2: C2 Val: 1
+Original MIN SPANNING TREE IS: 
+Vertex 1: C0 Vertex 2: C1 Val: 3
+Vertex 1: C0 Vertex 2: C2 Val: 4
+Vertex 1: C2 Vertex 2: C0 Val: 4
+Vertex 1: C3 Vertex 2: C4 Val: 2
+Vertex 1: C4 Vertex 2: C1 Val: 2
+Vertex 1: C4 Vertex 2: C3 Val: 2
+New MST:
+Vertex 1: C0 Vertex 2: C1 Val: 3
+Vertex 1: C1 Vertex 2: C2 Val: 1
+Vertex 1: C3 Vertex 2: C4 Val: 2
+Vertex 1: C4 Vertex 2: C1 Val: 2
+Vertex 1: C4 Vertex 2: C3 Val: 2
+
+Q5a case 2)**********ORIGINAL MST*********
+edges:  Vertex 1: C0 Vertex 2: C1 Val: 1
+edges:  Vertex 1: C1 Vertex 2: C4 Val: 3
+edges:  Vertex 1: C1 Vertex 2: C2 Val: 5
+edges:  Vertex 1: C4 Vertex 2: C3 Val: 2
+removed edge is:  Vertex 1: C0 Vertex 2: C1 Val: 1
+*******NEW MST********
+edges:  Vertex 1: C0 Vertex 2: C2 Val: 7
+edges:  Vertex 1: C1 Vertex 2: C4 Val: 3
+edges:  Vertex 1: C1 Vertex 2: C2 Val: 5
+edges:  Vertex 1: C4 Vertex 2: C3 Val: 2
+ 
+Q5b case 2) Inserted edge: Vertex 1: C2 Vertex 2: C3 Val: 3
+MIN SPANNING TREE IS: 
+Vertex 1: C0 Vertex 2: C1 Val: 1
+Vertex 1: C1 Vertex 2: C0 Val: 1
+Vertex 1: C1 Vertex 2: C4 Val: 3
+Vertex 1: C1 Vertex 2: C2 Val: 5
+Vertex 1: C3 Vertex 2: C4 Val: 2
+Vertex 1: C4 Vertex 2: C1 Val: 3
+Vertex 1: C4 Vertex 2: C3 Val: 2
+New MST:
+Vertex 1: C0 Vertex 2: C1 Val: 1
+Vertex 1: C1 Vertex 2: C0 Val: 1
+Vertex 1: C1 Vertex 2: C4 Val: 3
+Vertex 1: C2 Vertex 2: C3 Val: 3
+Vertex 1: C3 Vertex 2: C4 Val: 2
+Vertex 1: C4 Vertex 2: C1 Val: 3
+Vertex 1: C4 Vertex 2: C3 Val: 2
+
+Q6 case 1: Satisfiable. x1 =1, x2=1, x3=0, x4=1
+Q6 case 2: Not satistiable
+
+
+
+
