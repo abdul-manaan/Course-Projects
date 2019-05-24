@@ -221,11 +221,11 @@ def NetworkMaintainer(myInfo,is_FirstNode,myFinTable):
 
 
 class peer:
-    def __init__(self,ip,port,id):
+    def __init__(self,ip,port,idNum):
         self.sock = None
         self.ip = ip
         self.port = port
-        self.id = id
+        self.idNum = idNum
         self.s = socket.socket() #socket.AF_INET, socket.SOCK_STREAM 
         self.s.bind((self.ip,self.port))
         self.connector = socket.socket()
@@ -235,9 +235,9 @@ class peer:
     def setIP(self):
         try:
             self.ip = raw_input("Enter you IP ")
-            self.port = input("Enter you Port ")
+            self.port = int(raw_input("Enter you Port "))
             return True
-        except:
+        except Exception as _:
             return False
 
     def ListenForNewConnections(self,me):
@@ -267,9 +267,9 @@ class peer:
     def getOtherPeerIP(self):
         try:
             otherPeerIP = raw_input("Enter peer IP: ")
-            otherPeerPort = input("Enter Port No. of Peer: ")
+            otherPeerPort = int(raw_input("Enter Port No. of Peer: "))
             return (otherPeerIP,otherPeerPort)
-        except:
+        except Exception as _:
             return self.getOtherPeerIP()
 
 def pingPredecessor(sock):
@@ -285,7 +285,7 @@ def pingPredecessor(sock):
             print msg
             updatePredecessor()
         return True
-    except:
+    except Exception as _:
         updatePredecessor()
 
 
@@ -416,8 +416,8 @@ def saveFile(myFinTable,myInfo,msg): #PUT filename fileID peerIP peerPort
             myFinTable.forwardedRequestPUT += [msg] 
             time.sleep(1)
         return
-    except Exception as msg:
-        print msg
+    except Exception as err:
+        print err
 
 
 def sendMsgToAPeer(msg,ip,port):
@@ -706,26 +706,26 @@ class HashFunction:
         for x in self.fingertable:
             print self.fingertable[x]
 
-    def findPeer(self,id):
+    def findPeer(self,idNum):
         responsiblePeer = -1
         for i in range(self.hashSize):
             start = min(self.fingertable[i][0], self.fingertable[i][1])
             end = self.fingertable[(i+1)%self.hashSize][0]
-            if (start <= end) and (id in range(start,end)) and self.fingertable[i][1] != self.ID:
+            if (start <= end) and (idNum in range(start,end)) and self.fingertable[i][1] != self.ID:
                 responsiblePeer =  self.fingertable[i][1]
-            elif (start > end) and (id >= start  or id < end) and self.fingertable[i][1] != self.ID:
+            elif (start > end) and (idNum >= start  or idNum < end) and self.fingertable[i][1] != self.ID:
                 responsiblePeer =  self.fingertable[i][1]
         if responsiblePeer == -1:
             responsiblePeer = self.ID
         return responsiblePeer
 
-def is_between(id,start,end):
-    if id == start:
+def is_between(idNum,start,end):
+    if idNum == start:
         return True
     elif start <= end :
         return start in range(id,end)
     else:
-        return (id <= start) or (id < end)
+        return (idNum <= start) or (idNum < end)
 #####################################################################self.fingertable[i][1] != self.ID###################################
 ########################################################################################################
 
@@ -733,5 +733,4 @@ def is_between(id,start,end):
 
 
 
-if __name__== "__main__":
-    main()
+main()
