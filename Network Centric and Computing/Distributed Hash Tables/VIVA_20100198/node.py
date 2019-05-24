@@ -82,12 +82,12 @@ def takeUserInput(myFinTable,myInfo):
         if commmand == ':f':
             myFinTable.printFingerTable()
         elif commmand == ':s':
-            if len(myFinTable.successors):
+            if myFinTable.successors:
                 print myFinTable.successors[0]
             else:
                 print 'None'
         elif commmand == ':p':
-            if len(myFinTable.predecessors):
+            if myFinTable.predecessors:
                 print myFinTable.predecessors[0]
             else:
                 print 'None'
@@ -125,7 +125,7 @@ def NetworkMaintainer(myInfo,is_FirstNode,myFinTable):
             myInfo.sock.send("NEW %s %s %s"%(str(myInfo.id) , myInfo.ip, str(myPortNum)) )
                 
         while True:
-            if myInfo.sock == None:
+            if myInfo.sock is None:
                 continue
             data = myInfo.sock.recv(1024)
             if not data:
@@ -153,7 +153,7 @@ def NetworkMaintainer(myInfo,is_FirstNode,myFinTable):
                 if myInfo.mySuccessor:
                     myInfo.mySuccessor.send("MYNEWSUCCESSOR %s %s %s"%(sid, sip,sport))
                 if myInfo.myPredecessor:
-                    if len(myFinTable.successors) and myFinTable.predecessors[0] != myFinTable.successors[0]:
+                    if myFinTable.successors and myFinTable.predecessors[0] != myFinTable.successors[0]:
                         myInfo.myPredecessor.send("MYNEWSUCCESSOR %s %s %s"%(sid, sip,sport))
 
                 myInfo.mySuccessor = myInfo.sock
@@ -347,7 +347,7 @@ def peerMsgReceiver(client,addr,me,myInfo):
                     myInfo.myPredecessor.send("MYNEWPREDECESSOR %s %s %s" % (cid,cip,cport))
                     time.sleep(1)
                 if myInfo.mySuccessor:
-                    if (len(me.predecessors)) and me.predecessors[0] != me.successors[0]:
+                    if (me.predecessors) and me.predecessors[0] != me.successors[0]:
                         myInfo.mySuccessor.send("MYNEWPREDECESSOR %s %s %s" % (cid,cip,cport))
                         time.sleep(1)
                 me.updatePredecessor(int(cid),0)
@@ -439,7 +439,7 @@ def saveFileToStorage(myInfo,myFinTable,msg):
 
     data = sock.recv(1024)
     if data[:4] != "FILE":
-        return;
+        return
     name = data.split(" ")
     path = str(myInfo.id)
     if not os.path.exists(path):
@@ -493,7 +493,7 @@ def newPeer(msg, client,addr, myData,myInfo):
     cip = msg[2]
     cport = int(msg[3])
     responsiblePeer = myData.findPeer(cid)
-    if len(myData.predecessors) == 0:
+    if (myData.predecessors) == 0:
         #client.send("SUCCESSOR %s %s %s"%(str(myData.ID),myIPAddr,myPortNum ))
         if myInfo.mySuccessor:
             myInfo.mySuccessor.send("MYNEWSUCCESSOR %s %s %s" % (str(cid),cip,str(cport)))
@@ -612,8 +612,7 @@ def isPredecessor(a , b, c): # a -> myID, b -> clientID, c-> myCurrent Predecess
         return True
     elif b > a and b > c and c > a:
         return True
-    else:
-        return False
+    return False
 
 
 
@@ -642,8 +641,8 @@ class HashFunction:
         if peerid not in self.peers and len(self.peers) < self.maxpeers:
             self.peers[ peerid ] = (host, int(port))
             return True
-        else:
-            return False
+        
+        return False
 
     def getpeer( self, peerid ):
         #assert peerid in self.peers
@@ -670,7 +669,7 @@ class HashFunction:
                 self.predecessors[n] = peerID
 
     def updateSuccessor(self, peerID, n):
-        if len(self.successors) == 0:
+        if self.successors == 0:
             self.successors.append(peerID)
         elif len(self.successors) +1 == n:
             self.successors.append(peerID)
@@ -724,8 +723,7 @@ def is_between(idNum,start,end):
         return True
     elif start <= end :
         return start in range(id,end)
-    else:
-        return (idNum <= start) or (idNum < end)
+    return (idNum <= start) or (idNum < end)
 #####################################################################self.fingertable[i][1] != self.ID###################################
 ########################################################################################################
 
