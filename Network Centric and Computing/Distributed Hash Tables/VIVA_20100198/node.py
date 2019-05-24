@@ -602,8 +602,7 @@ def isSuccessor(a , b, c): # a -> myID, b -> clientID, c-> myCurrent Successor
         return True
     elif b < a and b < c and c < a:
         return True
-    else:
-        return False
+    return False
 
 def isPredecessor(a , b, c): # a -> myID, b -> clientID, c-> myCurrent Predecessor
     if b < a and b > c and c < b:
@@ -661,7 +660,7 @@ class HashFunction:
     def updatePredecessor(self, peerID, n):
         #update nth predecesoor ---- 
         if peerID not in self.predecessors:
-            if len(self.predecessors) == 0:
+            if self.predecessors == 0:
                 self.predecessors.append(peerID)
             elif len(self.predecessors) +1 == n:
                 self.predecessors.append(peerID)
